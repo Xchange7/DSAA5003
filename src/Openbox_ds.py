@@ -38,10 +38,9 @@ os.makedirs(OUTPUT_ROOT, exist_ok=True)
 N_FOLDS = 5
 NUM_LABELS = 7
 SEED = 42
-N_TRIALS = 50
-MAX_CONCURRENT_TRIALS = 4  # ★你有4张卡，这里设置为4，实现并行
+N_TRIALS = 20
+MAX_CONCURRENT_TRIALS = 4
 
-# H100 优化
 BATCH_SIZE = 16
 
 # 防止 Tokenizer 死锁
@@ -116,37 +115,26 @@ def load_raw_data_and_tokenizer():
 # =========================
 # Global Resource Manager
 # =========================
-# 用于并行训练时分配 GPU ID
 gpu_queue = multiprocessing.Manager().Queue()
 for i in range(MAX_CONCURRENT_TRIALS):
     gpu_queue.put(i)
 
-# 全局数据，利用 Linux Fork 机制让子进程可读，避免传递
 GLOBAL_TRAIN_DF = None
 GLOBAL_VALID_DF = None
-
 
 # =========================
 # Objective Function
 # =========================
 
 def objective_function(config):
-    """
-    OpenBox 调用的目标函数
-    Config 是一个字典，包含当次采样的超参数
-    """
-    # 1. 获取 GPU 资源
     try:
         gpu_id = gpu_queue.get(timeout=3600)  # 等待资源
     except Exception as e:
         logger.error("Failed to get GPU resource")
         return {'objectives': [999.0]}  # 返回极大 Loss
 
-    # 设置当前进程只能看到这块 GPU
-    # 注意：这必须在 torch 初始化 CUDA context 之前生效
     os.environ["CUDA_VISIBLE_DEVICES"] = str(gpu_id)
 
-    # 打印当前进程信息
     pid = os.getpid()
     print(f"Process {pid} running on GPU {gpu_id} with config: {config}")
 
@@ -155,7 +143,6 @@ def objective_function(config):
     try:
         set_seed(SEED + random.randint(0, 10000))
 
-        # 直接使用全局变量（Read-only）
         train_df = GLOBAL_TRAIN_DF
         valid_df = GLOBAL_VALID_DF
 
@@ -181,7 +168,6 @@ def objective_function(config):
             TARGET_MODEL,
             num_labels=NUM_LABELS,
             quantization_config=bnb_config,
-            # ★ 关键：因为前面设置了 CUDA_VISIBLE_DEVICES，这里 auto 会映射到唯一的可见卡
             device_map="auto",
             trust_remote_code=True,
             attn_implementation="sdpa",
@@ -232,7 +218,7 @@ def objective_function(config):
             bf16=True,
             fp16=False,
             disable_tqdm=True,
-            dataloader_num_workers=0,  # 并行进程中设为0更安全
+            dataloader_num_workers=0,
             ddp_find_unused_parameters=False,
         )
 
@@ -249,7 +235,6 @@ def objective_function(config):
         trainer.train()
 
         # 获取最佳 Loss
-        # Trainer 会自动加载最佳模型，所以 evaluate 结果就是最佳结果
         metrics = trainer.evaluate()
         loss_result = metrics["eval_log_loss"]
 
@@ -262,7 +247,7 @@ def objective_function(config):
         print(f"Error in trial: {e}")
         loss_result = 999.0
     finally:
-        # ★ 关键：释放 GPU 资源回到队列
+        # 释放 GPU 资源回到队列
         gpu_queue.put(gpu_id)
         # 强制垃圾回收
         gc.collect()
@@ -276,15 +261,14 @@ def objective_function(config):
 # =========================
 
 if __name__ == "__main__":
-    # 1. 准备数据 (加载到全局变量)
+    # 1. 准备数据
     t_df, v_df, _ = load_raw_data_and_tokenizer()
     GLOBAL_TRAIN_DF = t_df
     GLOBAL_VALID_DF = v_df
 
     print("Data loaded. Defining search space...")
 
-    # 2. 定义搜索空间 (OpenBox Style)
-    # OpenBox 的 API 与 Ray Tune 略有不同
+    # 2. 定义搜索空间
     space = sp.Space()
     space.add_variables([
         sp.Real("learning_rate", 5e-5, 5e-4, log=True),
@@ -308,18 +292,12 @@ if __name__ == "__main__":
         num_objectives=1,
         num_constraints=0,
         max_runs=N_TRIALS,
-        surrogate_type='gp',  # 默认高斯过程，也可以选 'prf' (随机森林)
+        surrogate_type='gp',  # 默认高斯过程
         acq_type='ei',  # 采集函数
         acq_optimizer_type='local_random',
         initial_runs=5,  # 初始随机探索次数
         task_id='deepseek_hpo',
-        # 并行设置
-        # 注意：OpenBox 的并行需要 backend 支持，
-        # 简单的多进程可以使用 batch_size + async 策略，
-        # 但标准的 Optimizer 类通常是串行的。
-        # 这里我们使用 batch_size 来触发 OpenBox 内部的并行建议生成，
-        # 并结合 multiprocessing (上面的 objective_function 逻辑) 来实现真正的并行。
-        # *实际上 OpenBox 有 ParallelOptimizer 类，用法如下*
+
     )
 
     # 重新定义为 ParallelOptimizer 以更好支持多卡

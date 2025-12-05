@@ -29,10 +29,8 @@ from ray.tune.schedulers import ASHAScheduler
 
 # import wandb
 # os.environ["WANDB_MODE"] = "offline"
-
 # os.environ["WANDB_PROJECT"] = "Deepseek--RandomSearch"
 
-# 3. 确保你之前的代码里删掉了禁用 WandB 的那行
 os.environ["WANDB_DISABLED"] = "true"
 
 # 防止 Tokenizer 死锁

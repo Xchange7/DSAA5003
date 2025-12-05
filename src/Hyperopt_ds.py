@@ -26,7 +26,6 @@ from transformers import (
 import ray
 from ray import tune
 from ray.tune.schedulers import ASHAScheduler
-# ★ 新增：引入 HyperOptSearch 和并发限制
 from ray.tune.search.hyperopt import HyperOptSearch
 from ray.tune.search import ConcurrencyLimiter
 
@@ -45,7 +44,6 @@ N_FOLDS = 5
 NUM_LABELS = 7
 SEED = 42
 N_TRIALS = 20
-
 BATCH_SIZE = 16
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
@@ -96,7 +94,12 @@ def load_raw_data_and_tokenizer():
     tokenizer.padding_side = "right"
 
     logger.info("Loading Data...")
-    df = pd.read_csv(os.path.join(DATA_DIR, "train.csv"))
+    try:
+        df = pd.read_csv(os.path.join(DATA_DIR, "train.csv"))
+    except FileNotFoundError:
+        logger.error(f"FATAL: Train data not found at {os.path.join(DATA_DIR, 'train.csv')}")
+        raise
+
     df["Response"] = df["Response"].fillna("NA")
 
     def format_text(row):
@@ -129,12 +132,8 @@ class RayReportCallback(TrainerCallback):
 # Train Func
 # =========================
 
-def train_func(config, train_df_ref=None, valid_df_ref=None):
+def train_func(config, train_df=None, valid_df=None):
     set_seed(SEED + random.randint(0, 10000))
-
-    # 从 Ray Object Store 获取数据
-    train_df = ray.get(train_df_ref)
-    valid_df = ray.get(valid_df_ref)
 
     tokenizer = AutoTokenizer.from_pretrained(TARGET_MODEL, trust_remote_code=True)
     tokenizer.pad_token = tokenizer.eos_token
@@ -193,10 +192,7 @@ def train_func(config, train_df_ref=None, valid_df_ref=None):
         learning_rate=config["learning_rate"],
         per_device_train_batch_size=BATCH_SIZE,
         per_device_eval_batch_size=BATCH_SIZE,
-
-        # 梯度累加逻辑
         gradient_accumulation_steps=config["grad_acc"] * 4,
-
         gradient_checkpointing=True,
         num_train_epochs=config["num_train_epochs"],
         weight_decay=config["weight_decay"],
@@ -213,7 +209,7 @@ def train_func(config, train_df_ref=None, valid_df_ref=None):
         save_total_limit=1,
 
         load_best_model_at_end=True,
-        metric_for_best_model="log_loss",
+        metric_for_best_model="eval_log_loss",
         greater_is_better=False,
 
         logging_steps=10,
@@ -250,11 +246,10 @@ def train_func(config, train_df_ref=None, valid_df_ref=None):
 if __name__ == "__main__":
     ray.init(num_gpus=4, include_dashboard=False)
 
+    # 1. 加载数据
     t_df, v_df, _ = load_raw_data_and_tokenizer()
 
-    train_df_ref = ray.put(t_df)
-    valid_df_ref = ray.put(v_df)
-
+    # 2. 定义搜索空间
     search_space = {
         "learning_rate": tune.loguniform(5e-5, 5e-4),
         "num_train_epochs": tune.choice([3, 4]),
@@ -267,17 +262,12 @@ if __name__ == "__main__":
         "lr_scheduler_type": tune.choice(["cosine", "linear"]),
     }
 
-    # 2. 定义 HyperOpt 搜索算法
     hyperopt_search = HyperOptSearch(
         metric="log_loss",
         mode="min",
     )
-
-    # ★ 关键：Hyperopt 是贝叶斯优化，它需要根据之前的 Trial 结果来生成新的参数。
-    # 如果 4 个 GPU 同时跑，一开始可能都是随机的。为了效果更好，可以限制并发建议的数量，
     algo = ConcurrencyLimiter(hyperopt_search, max_concurrent=4)
 
-    # 3. 定义 Scheduler (ASHA 用于在此基础上提前终止表现差的实验)
     scheduler = ASHAScheduler(
         metric="log_loss",
         mode="min",
@@ -287,15 +277,14 @@ if __name__ == "__main__":
     )
 
     tuner = tune.Tuner(
-        # ★ 关键：使用 tune.with_parameters 注入静态数据（DataFrame 引用）
         tune.with_resources(
-            tune.with_parameters(train_func, train_df_ref=train_df_ref, valid_df_ref=valid_df_ref),
+            tune.with_parameters(train_func, train_df=t_df, valid_df=v_df),
             resources={"gpu": 1, "cpu": 4}
         ),
         param_space=search_space,
         tune_config=tune.TuneConfig(
-            search_alg=algo,  # 这里传入 Hyperopt 算法
-            scheduler=scheduler,  # 这里传入 ASHA
+            search_alg=algo,
+            scheduler=scheduler,
             num_samples=N_TRIALS,
         ),
         run_config=tune.RunConfig(
