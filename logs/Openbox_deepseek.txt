@@ -1,0 +1,263 @@
+[2025-12-05 16:44:32,615][deepseek_hpo_parallel][INFO][color_logger.py:203] Logfile: /hpc2hdd/home/pxu364/dsaa/Openbox/logs/deepseek_hpo_parallel_2025-12-05-16-44-32-614835.log
+[2025-12-05 16:44:32,662][deepseek_hpo_parallel][INFO][generic_advisor.py:227] [BO auto selection]  acq_type: ei. acq_optimizer_type: local_random.
+[2025-12-05 16:44:32,704][deepseek_hpo_parallel][INFO][async_batch_advisor.py:80] #Call get_suggestion. len of running configs = 0.
+[2025-12-05 16:44:32,705][deepseek_hpo_parallel][INFO][async_batch_advisor.py:80] #Call get_suggestion. len of running configs = 1.
+[2025-12-05 16:44:32,708][deepseek_hpo_parallel][INFO][async_batch_advisor.py:80] #Call get_suggestion. len of running configs = 2.
+[2025-12-05 16:44:32,709][deepseek_hpo_parallel][INFO][async_batch_advisor.py:80] #Call get_suggestion. len of running configs = 3.
+[2025-12-05 17:16:41,351][deepseek_hpo_parallel][INFO][parallel_smbo.py:175] Update observation 1: Observation(config=Configuration(values={
+  'grad_acc': 1,
+  'label_smoothing_factor': 0.05,
+  'learning_rate': 0.0001581139,
+  'lora_dropout': 0.05,
+  'lora_r': 8,
+  'lr_scheduler_type': 'cosine',
+  'num_train_epochs': 3,
+  'warmup_ratio': 0.05,
+  'weight_decay': 0.01,
+})
+, objectives=[0.9456100730396673], trial_state=0, elapsed_time=1928.6364042758942, create_time=2025-12-05 17:16:41.347362).
+[2025-12-05 17:16:41,419][deepseek_hpo_parallel][INFO][async_batch_advisor.py:80] #Call get_suggestion. len of running configs = 3.
+[2025-12-05 17:16:46,399][deepseek_hpo_parallel][INFO][parallel_smbo.py:175] Update observation 2: Observation(config=Configuration(values={
+  'grad_acc': 1,
+  'label_smoothing_factor': 0.06756390652877156,
+  'learning_rate': 6.783395156685188e-05,
+  'lora_dropout': 0.1,
+  'lora_r': 32,
+  'lr_scheduler_type': 'cosine',
+  'num_train_epochs': 3,
+  'warmup_ratio': 0.08487822818485395,
+  'weight_decay': 0.01,
+})
+, objectives=[0.9694919222084011], trial_state=0, elapsed_time=1933.68128323555, create_time=2025-12-05 17:16:46.395847).
+[2025-12-05 17:16:46,427][deepseek_hpo_parallel][INFO][async_batch_advisor.py:80] #Call get_suggestion. len of running configs = 3.
+[2025-12-05 17:16:55,199][deepseek_hpo_parallel][INFO][parallel_smbo.py:175] Update observation 3: Observation(config=Configuration(values={
+  'grad_acc': 1,
+  'label_smoothing_factor': 0.019506138645396756,
+  'learning_rate': 0.00025459628681287217,
+  'lora_dropout': 0.05,
+  'lora_r': 64,
+  'lr_scheduler_type': 'cosine',
+  'num_train_epochs': 3,
+  'warmup_ratio': 0.08119827693405166,
+  'weight_decay': 0.01,
+})
+, objectives=[0.9114811338895921], trial_state=0, elapsed_time=1942.482913017273, create_time=2025-12-05 17:16:55.196075).
+[2025-12-05 17:16:55,239][deepseek_hpo_parallel][INFO][async_batch_advisor.py:80] #Call get_suggestion. len of running configs = 3.
+[2025-12-05 17:24:37,320][deepseek_hpo_parallel][INFO][parallel_smbo.py:175] Update observation 4: Observation(config=Configuration(values={
+  'grad_acc': 2,
+  'label_smoothing_factor': 0.027721712202337035,
+  'learning_rate': 0.00011523931507017987,
+  'lora_dropout': 0.1,
+  'lora_r': 64,
+  'lr_scheduler_type': 'linear',
+  'num_train_epochs': 4,
+  'warmup_ratio': 0.020418203279521565,
+  'weight_decay': 0.1,
+})
+, objectives=[0.9527185179059492], trial_state=0, elapsed_time=2404.604718208313, create_time=2025-12-05 17:24:37.316808).
+[2025-12-05 17:24:37,388][deepseek_hpo_parallel][INFO][async_batch_advisor.py:80] #Call get_suggestion. len of running configs = 3.
+[2025-12-05 17:48:44,342][deepseek_hpo_parallel][INFO][parallel_smbo.py:175] Update observation 5: Observation(config=Configuration(values={
+  'grad_acc': 1,
+  'label_smoothing_factor': 0.09907930486031952,
+  'learning_rate': 0.0003856509156772445,
+  'lora_dropout': 0.1,
+  'lora_r': 8,
+  'lr_scheduler_type': 'cosine',
+  'num_train_epochs': 3,
+  'warmup_ratio': 0.04829649222587228,
+  'weight_decay': 0.01,
+})
+, objectives=[0.859787360446503], trial_state=0, elapsed_time=1922.9159581661224, create_time=2025-12-05 17:48:44.339666).
+[2025-12-05 17:48:44,430][deepseek_hpo_parallel][INFO][async_batch_advisor.py:80] #Call get_suggestion. len of running configs = 3.
+[2025-12-05 17:49:10,457][deepseek_hpo_parallel][INFO][parallel_smbo.py:175] Update observation 6: Observation(config=Configuration(values={
+  'grad_acc': 1,
+  'label_smoothing_factor': 0.019840915355188053,
+  'learning_rate': 0.0002789951088642284,
+  'lora_dropout': 0.05,
+  'lora_r': 64,
+  'lr_scheduler_type': 'cosine',
+  'num_train_epochs': 3,
+  'warmup_ratio': 0.08129714525873032,
+  'weight_decay': 0.01,
+})
+, objectives=[0.8850008112178331], trial_state=0, elapsed_time=1934.9935879707336, create_time=2025-12-05 17:49:10.454512).
+[2025-12-05 17:49:10,550][deepseek_hpo_parallel][INFO][async_batch_advisor.py:80] #Call get_suggestion. len of running configs = 3.
+[2025-12-05 17:56:17,004][deepseek_hpo_parallel][INFO][parallel_smbo.py:175] Update observation 7: Observation(config=Configuration(values={
+  'grad_acc': 2,
+  'label_smoothing_factor': 0.016237867743854596,
+  'learning_rate': 7.040601313629341e-05,
+  'lora_dropout': 0.1,
+  'lora_r': 32,
+  'lr_scheduler_type': 'cosine',
+  'num_train_epochs': 4,
+  'warmup_ratio': 0.09557885694688284,
+  'weight_decay': 0.1,
+})
+, objectives=[0.9559567957953268], trial_state=0, elapsed_time=2370.5707993507385, create_time=2025-12-05 17:56:17.001424).
+[2025-12-05 17:56:17,020][deepseek_hpo_parallel][INFO][async_batch_advisor.py:80] #Call get_suggestion. len of running configs = 3.
+[2025-12-05 17:57:08,927][deepseek_hpo_parallel][INFO][parallel_smbo.py:175] Update observation 8: Observation(config=Configuration(values={
+  'grad_acc': 1,
+  'label_smoothing_factor': 0.013227574764713602,
+  'learning_rate': 0.000242577125293861,
+  'lora_dropout': 0.05,
+  'lora_r': 64,
+  'lr_scheduler_type': 'cosine',
+  'num_train_epochs': 3,
+  'warmup_ratio': 0.06949092290150109,
+  'weight_decay': 0.01,
+})
+, objectives=[0.8707296013703413], trial_state=0, elapsed_time=1951.331533908844, create_time=2025-12-05 17:57:08.924286).
+[2025-12-05 17:57:08,946][deepseek_hpo_parallel][INFO][async_batch_advisor.py:80] #Call get_suggestion. len of running configs = 3.
+[2025-12-05 18:20:44,970][deepseek_hpo_parallel][INFO][parallel_smbo.py:175] Update observation 9: Observation(config=Configuration(values={
+  'grad_acc': 1,
+  'label_smoothing_factor': 0.09907930486031952,
+  'learning_rate': 0.0003856509156772445,
+  'lora_dropout': 0.1,
+  'lora_r': 8,
+  'lr_scheduler_type': 'cosine',
+  'num_train_epochs': 3,
+  'warmup_ratio': 0.04829649222587228,
+  'weight_decay': 0.1,
+})
+, objectives=[0.8583210569881291], trial_state=0, elapsed_time=1920.345304965973, create_time=2025-12-05 18:20:44.966752).
+[2025-12-05 18:20:45,050][deepseek_hpo_parallel][INFO][async_batch_advisor.py:80] #Call get_suggestion. len of running configs = 3.
+[2025-12-05 18:20:56,915][deepseek_hpo_parallel][INFO][parallel_smbo.py:175] Update observation 10: Observation(config=Configuration(values={
+  'grad_acc': 1,
+  'label_smoothing_factor': 0.08724815818302424,
+  'learning_rate': 0.0003609466133887218,
+  'lora_dropout': 0.1,
+  'lora_r': 8,
+  'lr_scheduler_type': 'cosine',
+  'num_train_epochs': 3,
+  'warmup_ratio': 0.024871034058833674,
+  'weight_decay': 0.01,
+})
+, objectives=[0.8895354130117374], trial_state=0, elapsed_time=1905.9701597690582, create_time=2025-12-05 18:20:56.911697).
+[2025-12-05 18:20:56,931][deepseek_hpo_parallel][INFO][async_batch_advisor.py:80] #Call get_suggestion. len of running configs = 3.
+[2025-12-05 18:28:13,588][deepseek_hpo_parallel][INFO][parallel_smbo.py:175] Update observation 11: Observation(config=Configuration(values={
+  'grad_acc': 1,
+  'label_smoothing_factor': 0.05373359011949777,
+  'learning_rate': 0.0003856509156772445,
+  'lora_dropout': 0.1,
+  'lora_r': 8,
+  'lr_scheduler_type': 'cosine',
+  'num_train_epochs': 3,
+  'warmup_ratio': 0.07044202660166159,
+  'weight_decay': 0.01,
+})
+, objectives=[0.8768837722979332], trial_state=0, elapsed_time=1916.2960951328278, create_time=2025-12-05 18:28:13.585165).
+[2025-12-05 18:28:13,684][deepseek_hpo_parallel][INFO][async_batch_advisor.py:80] #Call get_suggestion. len of running configs = 3.
+[2025-12-05 18:29:39,823][deepseek_hpo_parallel][INFO][parallel_smbo.py:175] Update observation 12: Observation(config=Configuration(values={
+  'grad_acc': 1,
+  'label_smoothing_factor': 0.014617358848796103,
+  'learning_rate': 0.00025459628681287217,
+  'lora_dropout': 0.05,
+  'lora_r': 64,
+  'lr_scheduler_type': 'cosine',
+  'num_train_epochs': 3,
+  'warmup_ratio': 0.06473035632729071,
+  'weight_decay': 0.01,
+})
+, objectives=[0.8286782315759109], trial_state=0, elapsed_time=1950.5622878074646, create_time=2025-12-05 18:29:39.820560).
+[2025-12-05 18:29:39,824][deepseek_hpo_parallel][INFO][async_batch_advisor.py:80] #Call get_suggestion. len of running configs = 3.
+[2025-12-05 18:52:43,428][deepseek_hpo_parallel][INFO][parallel_smbo.py:175] Update observation 13: Observation(config=Configuration(values={
+  'grad_acc': 1,
+  'label_smoothing_factor': 0.09880884433046887,
+  'learning_rate': 0.0003856509156772445,
+  'lora_dropout': 0.1,
+  'lora_r': 8,
+  'lr_scheduler_type': 'cosine',
+  'num_train_epochs': 3,
+  'warmup_ratio': 0.04829649222587228,
+  'weight_decay': 0.1,
+})
+, objectives=[0.8752758764241453], trial_state=0, elapsed_time=1906.2299580574036, create_time=2025-12-05 18:52:43.424900).
+[2025-12-05 18:52:43,450][deepseek_hpo_parallel][INFO][async_batch_advisor.py:80] #Call get_suggestion. len of running configs = 3.
+[2025-12-05 18:52:45,387][deepseek_hpo_parallel][INFO][parallel_smbo.py:175] Update observation 14: Observation(config=Configuration(values={
+  'grad_acc': 1,
+  'label_smoothing_factor': 0.09907930486031952,
+  'learning_rate': 0.00018902283643927833,
+  'lora_dropout': 0.1,
+  'lora_r': 8,
+  'lr_scheduler_type': 'cosine',
+  'num_train_epochs': 3,
+  'warmup_ratio': 0.04829649222587228,
+  'weight_decay': 0.1,
+})
+, objectives=[0.9083557671335468], trial_state=0, elapsed_time=1920.0643191337585, create_time=2025-12-05 18:52:45.384321).
+[2025-12-05 18:52:45,411][deepseek_hpo_parallel][INFO][async_batch_advisor.py:80] #Call get_suggestion. len of running configs = 3.
+[2025-12-05 19:00:10,600][deepseek_hpo_parallel][INFO][parallel_smbo.py:175] Update observation 15: Observation(config=Configuration(values={
+  'grad_acc': 1,
+  'label_smoothing_factor': 0.09907664473560417,
+  'learning_rate': 0.00015472078158650825,
+  'lora_dropout': 0.1,
+  'lora_r': 8,
+  'lr_scheduler_type': 'cosine',
+  'num_train_epochs': 3,
+  'warmup_ratio': 0.046572436510117304,
+  'weight_decay': 0.1,
+})
+, objectives=[0.9061992262621629], trial_state=0, elapsed_time=1916.6668441295624, create_time=2025-12-05 19:00:10.597225).
+[2025-12-05 19:00:10,629][deepseek_hpo_parallel][INFO][async_batch_advisor.py:80] #Call get_suggestion. len of running configs = 3.
+[2025-12-05 19:00:10,629][deepseek_hpo_parallel][INFO][async_batch_advisor.py:106] Sample random config. rand_prob=0.100000.
+[2025-12-05 19:02:11,446][deepseek_hpo_parallel][INFO][parallel_smbo.py:175] Update observation 16: Observation(config=Configuration(values={
+  'grad_acc': 1,
+  'label_smoothing_factor': 0.014617358848796103,
+  'learning_rate': 0.00025459628681287217,
+  'lora_dropout': 0.05,
+  'lora_r': 64,
+  'lr_scheduler_type': 'cosine',
+  'num_train_epochs': 3,
+  'warmup_ratio': 0.06473035632729071,
+  'weight_decay': 0.1,
+})
+, objectives=[0.8781787892246895], trial_state=0, elapsed_time=1951.2486624717712, create_time=2025-12-05 19:02:11.443127).
+[2025-12-05 19:02:11,467][deepseek_hpo_parallel][INFO][async_batch_advisor.py:80] #Call get_suggestion. len of running configs = 3.
+[2025-12-05 19:25:00,571][deepseek_hpo_parallel][INFO][parallel_smbo.py:175] Update observation 17: Observation(config=Configuration(values={
+  'grad_acc': 1,
+  'label_smoothing_factor': 0.014617358848796103,
+  'learning_rate': 0.00028025059268343066,
+  'lora_dropout': 0.05,
+  'lora_r': 64,
+  'lr_scheduler_type': 'cosine',
+  'num_train_epochs': 3,
+  'warmup_ratio': 0.07890457430174212,
+  'weight_decay': 0.01,
+})
+, objectives=[0.8861278006535227], trial_state=0, elapsed_time=1936.757006406784, create_time=2025-12-05 19:25:00.568274).
+[2025-12-05 19:25:15,823][deepseek_hpo_parallel][INFO][parallel_smbo.py:175] Update observation 18: Observation(config=Configuration(values={
+  'grad_acc': 1,
+  'label_smoothing_factor': 0.014274758712837924,
+  'learning_rate': 0.0002475656408383343,
+  'lora_dropout': 0.05,
+  'lora_r': 64,
+  'lr_scheduler_type': 'cosine',
+  'num_train_epochs': 3,
+  'warmup_ratio': 0.034542633309883476,
+  'weight_decay': 0.01,
+})
+, objectives=[0.9540333316779468], trial_state=0, elapsed_time=1949.9933478832245, create_time=2025-12-05 19:25:15.820024).
+[2025-12-05 19:32:38,015][deepseek_hpo_parallel][INFO][parallel_smbo.py:175] Update observation 19: Observation(config=Configuration(values={
+  'grad_acc': 1,
+  'label_smoothing_factor': 0.010515831658752217,
+  'learning_rate': 0.00011079241611122118,
+  'lora_dropout': 0.1,
+  'lora_r': 64,
+  'lr_scheduler_type': 'linear',
+  'num_train_epochs': 3,
+  'warmup_ratio': 0.07473056336896305,
+  'weight_decay': 0.1,
+})
+, objectives=[0.8856427364824895], trial_state=0, elapsed_time=1947.3790094852448, create_time=2025-12-05 19:32:38.012093).
+[2025-12-05 19:34:40,981][deepseek_hpo_parallel][INFO][parallel_smbo.py:175] Update observation 20: Observation(config=Configuration(values={
+  'grad_acc': 1,
+  'label_smoothing_factor': 0.01434355942807889,
+  'learning_rate': 0.00019179897421964782,
+  'lora_dropout': 0.05,
+  'lora_r': 64,
+  'lr_scheduler_type': 'cosine',
+  'num_train_epochs': 3,
+  'warmup_ratio': 0.08109351166143887,
+  'weight_decay': 0.01,
+})
+, objectives=[0.8855394669482469], trial_state=0, elapsed_time=1949.0980632305145, create_time=2025-12-05 19:34:40.978146).
