@@ -1,0 +1,42 @@
+Trial train_func_794373f1 completed after 10 iterations at 2025-12-05 18:38:57. Total running time: 1hr 27min 7s
+╭──────────────────────────────────────────────╮
+│ Trial train_func_794373f1 result             │
+├──────────────────────────────────────────────┤
+│ checkpoint_dir_name                          │
+│ time_this_iter_s                     112.643 │
+│ time_total_s                         1139.99 │
+│ training_iteration                        10 │
+│ accuracy                             0.65539 │
+│ log_loss                             0.95776 │
+╰──────────────────────────────────────────────╯
+2025-12-05 18:38:57,838 INFO tune.py:1009 -- Wrote the latest version of all result files and experiment state to '/data/user/pxu364/dsaa/Hyperopt/output_deepseek_hyperopt/deepseek_hyperopt_run' in 0.0213s.
+
+Trial status: 20 TERMINATED
+Current time: 2025-12-05 18:38:57. Total running time: 1hr 27min 7s
+Logical resource usage: 4.0/96 CPUs, 1.0/4 GPUs (0.0/1.0 accelerator_type:H100)
+╭─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name            status         learning_rate     num_train_epochs     grad_acc     lora_r     lora_dropout     ..._smoothing_factor     weight_decay     warmup_ratio   lr_scheduler_type       iter     total time (s)     log_loss     accuracy │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_func_6d4a065a   TERMINATED       6.2711e-05                     3            1         64             0.1                0.0239453              0.1        0.0168048    linear                     7            816.041     0.939045     0.660401 │
+│ train_func_b25e3219   TERMINATED       0.000113461                    3            2         32             0.1                0.0174916              0.01       0.0669906    linear                     3            640.095     0.972142     0.620301 │
+│ train_func_ae4c7ab5   TERMINATED       0.000183826                    4            2          8             0.1                0.0711646              0.01       0.00758205   linear                     5           1062.76      0.98609      0.619048 │
+│ train_func_453b8da3   TERMINATED       0.000354701                    4            2          8             0.05               0.0711834              0.01       0.00516658   cosine                     5           1056.72      0.991879     0.640351 │
+│ train_func_8283f968   TERMINATED       8.58469e-05                    4            1         64             0.05               0.038567               0.01       0.0986381    linear                    10           1157.43      0.966595     0.677945 │
+│ train_func_5f1c137e   TERMINATED       0.000273062                    4            1         64             0.1                0.0738175              0.1        0.0742839    linear                    10           1157.4       0.917291     0.666667 │
+│ train_func_66d8ea9a   TERMINATED       0.000233914                    3            1         64             0.05               0.0921807              0.01       0.0750566    linear                     7            822.599     0.905793     0.680451 │
+│ train_func_ffe53153   TERMINATED       5.46292e-05                    3            2         16             0.05               0.0868185              0.01       0.0440427    cosine                     3            637.908     1.20037      0.548872 │
+│ train_func_200aaca6   TERMINATED       0.000182367                    4            1          8             0.05               0.00175137             0.1        0.0106057    cosine                    10           1146         1.00622      0.64411  │
+│ train_func_01bf6d47   TERMINATED       0.000310014                    3            2         32             0.1                0.0867464              0.1        0.0431644    linear                     3            640.989     0.948203     0.645363 │
+│ train_func_2582eaf4   TERMINATED       5.44376e-05                    3            2         64             0.05               0.0471965              0.01       0.0712963    cosine                     3            639.305     1.04282      0.602757 │
+│ train_func_2d4e9cdb   TERMINATED       7.12615e-05                    4            1         32             0.1                0.0728317              0.01       0.00510415   linear                    10           1147.55      1.02796      0.637845 │
+│ train_func_107a3859   TERMINATED       0.000311654                    4            1          8             0.1                0.00939297             0.01       0.0571831    cosine                    10           1149.65      0.989676     0.669173 │
+│ train_func_a44e475d   TERMINATED       5.91956e-05                    4            1         64             0.05               0.0524378              0.1        0.0481937    linear                    10           1154.54      1.02667      0.62782  │
+│ train_func_081e777b   TERMINATED       0.000286333                    3            2         64             0.1                0.0946015              0.01       0.0446474    cosine                     3            641.594     0.896094     0.665414 │
+│ train_func_197034a6   TERMINATED       6.22514e-05                    3            1         64             0.1                0.0931449              0.01       0.0353754    linear                     7            813.251     0.966779     0.632832 │
+│ train_func_b1d4525f   TERMINATED       0.00012609                     4            2         16             0.1                0.0564948              0.01       0.00224167   linear                     5           1054.83      0.996156     0.621554 │
+│ train_func_5f1c33bd   TERMINATED       0.000106725                    3            2         64             0.1                0.0114641              0.01       0.0872966    cosine                     3            643.327     0.98152      0.625313 │
+│ train_func_90b3b24d   TERMINATED       0.000311119                    3            2         16             0.05               0.0682167              0.01       0.017662     cosine                     3            635.143     0.916002     0.639098 │
+│ train_func_794373f1   TERMINATED       0.000161664                    4            1          8             0.1                0.0181806              0.01       0.0688076    cosine                    10           1139.99      0.957759     0.655388 │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Best config:  {'learning_rate': 0.00028633289369251337, 'num_train_epochs': 3, 'grad_acc': 2, 'lora_r': 64, 'lora_dropout': 0.1, 'label_smoothing_factor': 0.09460149791963876, 'weight_decay': 0.01, 'warmup_ratio': 0.04464742354815518, 'lr_scheduler_type': 'cosine'}
