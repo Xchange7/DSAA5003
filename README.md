@@ -126,4 +126,44 @@ For our setup (4x A800), this is set to allow 4 parallel jobs.
 
 **Results**: The Mistral script explicitly exports all_trials_results.csv for offline analysis.
 
+## 🚀 Final Training & Inference Pipeline
+
+After identifying the optimal hyperparameters via the HPO stage (Ray Tune/OpenBox), we execute a two-stage pipeline to generate the final model and submission predictions.
+
+### 1. Retraining with Best Hyperparameters
+
+We retrain the DeepSeek-R1-Distill-Llama-8B model using the global best configuration found during our experiments.**Script:** `train_final.py`
+
+This script:
+
+- Loads the pre-trained 4-bit Quantized model.
+- Applies the optimal LoRA configuration (Rank=32, Alpha=64, Dropout=0.1).
+- Uses the specific learning rate (2.35×10−4) and Cosine scheduler found by our best Random Search trial.
+- Saves the final adapter weights to `./final_best_model_output/best_model`.
+
+**Usage:**
+
+Before running, please ensure you update the `TARGET_MODEL` and `DATA_DIR` paths in the script to match your local environment.
+
+```bash
+python train_final.py
+```
+
+### 2. Inference & Submission
+
+Once the model is retrained, we run inference on the test dataset to generate the `submission.csv` file containing probability distributions for the 7 target classes. **Script:** `inference.py`
+
+This script:
+
+- Merges the base model with the trained LoRA adapter from Step 1.
+- Tokenizes the test data (`test.csv`).
+- Performs batched inference (Batch Size=32) for efficiency.
+- Outputs the results to `submission.csv`.
+
+**Usage:**
+
+```bash
+python inference.py
+```
+
 [//]: # (**JSON**: OpenBox exports optimization history to openbox_results.json.)
