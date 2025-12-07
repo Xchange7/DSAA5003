@@ -1,3 +1,5 @@
 datasets/
 .idea/
 submit/
+.DS_Store
+**/.DS_Store
