@@ -166,4 +166,21 @@ This script:
 python inference.py
 ```
 
+## 🙏 Acknowledgements
+
+This project is heavily inspired by and built upon the foundational work provided in the Kaggle community. We would like to express our gratitude to **ihebch** for the original implementation of the Quantized LoRA fine-tuning pipeline.
+
+We gratefully acknowledge the following contributions from the Kaggle community, which served as the foundation for this repository:
+
+1.  **H2O.ai predict the LLM - Mistral 7B quantized LoRA** by **[ihebch](https://www.kaggle.com/ihebch)**
+    * [Link to Notebook](https://www.kaggle.com/code/ihebch/h2o-ai-predict-the-llm-mistral-7b-quantized-lora/notebook)
+
+2.  **2nd Place Solution: LLM Decoders** by **Kha Vo & Binga**
+    * [Link to Writeup](https://www.kaggle.com/competitions/h2oai-predict-the-llm/writeups/kha-vo-binga-2nd-place-solution-llm-decoders-assig)
+
+These resources provided both the codebase for LoRA fine-tuning and the strategic direction for our hyperparameter optimization experiments.
+
+Also, Thank you Gemini-3 for helping us debug giving us suggestions for report.
+
+
 [//]: # (**JSON**: OpenBox exports optimization history to openbox_results.json.)
